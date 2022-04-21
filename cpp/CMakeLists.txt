@@ -598,7 +598,7 @@ endif()
 
 # Add cuFile interface if available
 if(TARGET cuFile::cuFile_interface)
-  target_link_libraries(cudf PRIVATE cuFile::cuFile_interface)
+  target_link_libraries(cudf INTERFACE cuFile::cuFile_interface)
 endif()
 
 if(CUDA_STATIC_RUNTIME)
