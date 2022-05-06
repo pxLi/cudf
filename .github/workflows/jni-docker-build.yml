@@ -26,6 +26,9 @@ jobs:
           username: pxli
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: echo
+        run: echo ${{ env.IMAGE_NAME }}:${{ env.GITHUB_REF_NAME }},${{ env.IMAGE_NAME }}:${{ env.GITHUB_SHA }}
+
       - name: Build and Push
         uses: docker/build-push-action@v3
         with:
