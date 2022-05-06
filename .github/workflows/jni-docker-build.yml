@@ -34,5 +34,5 @@ jobs:
           file: java/ci/Dockerfile.centos7
         env:
           IMAGE_NAME: pxli/cudf-jni-build
-          IMAGE_REF: ${{ github.head.ref }}
+          IMAGE_REF: ${{ GITHUB_HEAD_REF }}
           SHORT_SHA: ${GITHUB_SHA::7}
