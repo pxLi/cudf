@@ -26,14 +26,16 @@ jobs:
           username: pxli
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: echo
-        run: echo ${{ env.IMAGE_NAME }}:${{ env.GITHUB_REF_NAME }},${{ env.IMAGE_NAME }}:${{ env.GITHUB_SHA }}
+      - name: Set the value
+        id: step_one
+        run: |
+          echo "IMAGE_NAME=pxli/cudf-jni-build" >> $GITHUB_ENV
+          echo "IMAGE_REF=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+          echo "IMAGE_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Build and Push
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ env.IMAGE_NAME }}:${{ env.GITHUB_REF_NAME }},${{ env.IMAGE_NAME }}:${{ env.GITHUB_SHA }}
+          tags: "${{ env.IMAGE_NAME }}:${{ env.IMAGE_REF }},${{ env.IMAGE_NAME }}:${{ env.IMAGE_SHA }}"
           file: java/ci/Dockerfile.centos7
-        env:
-          IMAGE_NAME: pxli/cudf-jni-build
