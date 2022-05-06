@@ -23,11 +23,10 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          username: pxli
+          username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set the value
-        id: step_one
+      - name: Set ENVs
         run: |
           echo "IMAGE_NAME=pxli/cudf-jni-build" >> $GITHUB_ENV
           echo "IMAGE_REF=${GITHUB_REF_NAME}" >> $GITHUB_ENV
