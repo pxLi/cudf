@@ -30,8 +30,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ env.IMAGE_NAME }}:${{ github.head.ref }},${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
+          tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_REF }},${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
           file: java/ci/Dockerfile.centos7
         env:
           IMAGE_NAME: pxli/cudf-jni-build
+          IMAGE_REF: ${{ github.head.ref }}
           SHORT_SHA: ${GITHUB_SHA::7}
