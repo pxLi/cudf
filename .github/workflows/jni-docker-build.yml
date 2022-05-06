@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  docker:
+  docker-build:
     if: github.repository == 'pxLi/cudf'
     runs-on: ubuntu-latest
     steps:
@@ -33,5 +33,5 @@ jobs:
           tags: ${{ env.IMAGE_NAME }}:${{ env.GITHUB_REF_NAME }},${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
           file: java/ci/Dockerfile.centos7
         env:
-          IMAGE_NAME: pxli/cudf-jni-build
+          IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/cudf-jni-build
           SHORT_SHA: ${GITHUB_SHA::7}
